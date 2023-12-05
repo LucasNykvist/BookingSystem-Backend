@@ -2,14 +2,11 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("uuid")
     id: number;
 
     @Column()
     email: string;
-
-    @Column()
-    company: string;
 
     @Column()
     phone: string;

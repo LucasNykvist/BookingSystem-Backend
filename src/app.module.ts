@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users/users.service';
-import { UsersController } from './users/users.controller';
+import { UsersService } from './modules/users/services/users.service';
+import { UsersController } from './modules/users/controllers/users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './users/entities/user.entity';
+import { User } from './modules/users/entities/user.entity';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { User } from './users/entities/user.entity';
       password: "MonaLisa200sx",
       database: "BookerDB",
       entities: [User],
-      synchronize: false
+      synchronize: true
     }),
     TypeOrmModule.forFeature([User])
   ],
