@@ -3,6 +3,7 @@ import { UsersService } from './modules/users/services/users.service';
 import { UsersController } from './modules/users/controllers/users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './modules/users/entities/user.entity';
+import { Note } from './modules/notes/entities/note.entity';
 
 @Module({
   imports: [
@@ -13,10 +14,10 @@ import { User } from './modules/users/entities/user.entity';
       username: "postgres",
       password: "MonaLisa200sx",
       database: "BookerDB",
-      entities: [User],
+      entities: [User, Note],
       synchronize: true
     }),
-    TypeOrmModule.forFeature([User])
+    TypeOrmModule.forFeature([User, Note])
   ],
   controllers: [UsersController],
   providers: [UsersService],
