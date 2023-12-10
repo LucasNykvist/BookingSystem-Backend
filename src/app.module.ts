@@ -12,7 +12,7 @@ import { Note } from './modules/notes/entities/note.entity';
       host: "localhost",
       port: 5432,
       username: "postgres",
-      password: "MonaLisa200sx",
+      password: "postgres",
       database: "BookerDB",
       entities: [User, Note],
       synchronize: true
