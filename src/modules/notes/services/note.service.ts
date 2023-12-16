@@ -10,8 +10,11 @@ export class NoteService {
     this.noteRepository.create(note);
   }
 
-  public getAllNotes() {
-    const notes = this.noteRepository.getAll();
-    console.log(notes);
+  public async getAllNotes() {
+    return await this.noteRepository.getAll();
+  }
+
+  public async getNoteById(id){
+    return await this.noteRepository.getById(id)
   }
 }

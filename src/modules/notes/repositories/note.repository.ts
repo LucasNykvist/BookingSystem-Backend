@@ -9,15 +9,16 @@ export class NoteRepository {
   constructor(
     @InjectRepository(Note) private noteRepository: Repository<Note>,
   ) {}
-  
+
   public create(note: CreateNoteDTOS): Promise<any> {
     return this.noteRepository.save(note);
   }
 
-  public getAll(): Promise<Note[]> {
-    const notes = this.noteRepository.find();
-    console.log("repo:", notes);
-    return notes
+  public async getAll(): Promise<Note[]> {
+    return await this.noteRepository.find();
   }
 
+  public async getById(ID): Promise<Note>{
+    return await this.noteRepository.findOne({where: ID = ID})
+  }
 }
