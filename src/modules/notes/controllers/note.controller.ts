@@ -3,18 +3,17 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Param,
   Post,
-  Req,
   Res,
 } from '@nestjs/common';
 import { NoteService } from '../services/note.service';
 import { CreateNoteDTOS } from '../DTOs/create-note.dto';
 import { Response, Request } from 'express';
-import { NoteRepository } from '../repositories/note.repository';
 
 @Controller('/api/note')
 export class NoteController {
-  constructor(private readonly noteService: NoteService, private readonly noteRepo: NoteRepository) {}
+  constructor(private readonly noteService: NoteService) {}
 
   @Post('/create')
   public async createNote(@Body() note: CreateNoteDTOS, @Res() res: Response) {
@@ -28,8 +27,8 @@ export class NoteController {
     res.status(HttpStatus.OK).send(notes);
   }
 
-  @Get("/id")
-  public async getById(@Res() res: Response, @Body() id: any) {
+  @Get("/:id")
+  public async getById(@Res() res: Response, @Param("id") id : string) {
     const noteById = await this.noteService.getNoteById(id);
     res.send(noteById).status(HttpStatus.OK)
   }

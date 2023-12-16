@@ -14,7 +14,7 @@ export class NoteService {
     return await this.noteRepository.getAll();
   }
 
-  public async getNoteById(id){
+  public async getNoteById(id: string){    
     return await this.noteRepository.getById(id)
   }
 }
