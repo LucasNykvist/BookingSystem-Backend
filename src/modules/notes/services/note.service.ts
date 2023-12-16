@@ -9,4 +9,9 @@ export class NoteService {
   public async createNote(note: CreateNoteDTOS): Promise<any> {
     this.noteRepository.create(note);
   }
+
+  public getAllNotes() {
+    const notes = this.noteRepository.getAll();
+    console.log(notes);
+  }
 }

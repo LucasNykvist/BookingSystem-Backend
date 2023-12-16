@@ -13,7 +13,7 @@ import { NotesModule } from './modules/notes/notes.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'postgres',
+      password: 'MonaLisa200sx',
       database: 'BookerDB',
       entities: [User, Note],
       synchronize: true,

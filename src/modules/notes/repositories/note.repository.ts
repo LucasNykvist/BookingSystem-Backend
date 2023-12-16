@@ -9,12 +9,15 @@ export class NoteRepository {
   constructor(
     @InjectRepository(Note) private noteRepository: Repository<Note>,
   ) {}
+  
+  public create(note: CreateNoteDTOS): Promise<any> {
+    return this.noteRepository.save(note);
+  }
 
   public getAll(): Promise<Note[]> {
-    return this.noteRepository.find();
+    const notes = this.noteRepository.find();
+    console.log("repo:", notes);
+    return notes
   }
 
-  public create(note: CreateNoteDTOS) {
-    return this.noteRepository.create(note);
-  }
 }

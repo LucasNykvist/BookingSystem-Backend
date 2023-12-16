@@ -26,6 +26,9 @@ export class NoteController {
 
   @Get()
   public async getAll(@Res() res: Response) {
-    res.status(HttpStatus.OK).send('Hello');
+    const notes = this.noteService.getAllNotes();
+    console.log(notes);
+
+    res.status(HttpStatus.OK).send(notes);
   }
 }
