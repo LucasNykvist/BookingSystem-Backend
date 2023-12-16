@@ -4,22 +4,24 @@ import { UsersController } from './modules/users/controllers/users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './modules/users/entities/user.entity';
 import { Note } from './modules/notes/entities/note.entity';
+import { NotesModule } from './modules/notes/notes.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: "postgres",
-      host: "localhost",
+      type: 'postgres',
+      host: 'localhost',
       port: 5432,
-      username: "postgres",
-      password: "postgres",
-      database: "BookerDB",
+      username: 'postgres',
+      password: 'postgres',
+      database: 'BookerDB',
       entities: [User, Note],
-      synchronize: true
+      synchronize: true,
     }),
-    TypeOrmModule.forFeature([User, Note])
+    TypeOrmModule.forFeature([User, Note]),
+    NotesModule,
   ],
   controllers: [UsersController],
   providers: [UsersService],
 })
-export class AppModule { }
+export class AppModule {}
