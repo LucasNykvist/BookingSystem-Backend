@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -27,9 +28,18 @@ export class NoteController {
     res.status(HttpStatus.OK).send(notes);
   }
 
-  @Get("/:id")
-  public async getById(@Res() res: Response, @Param("id") id : string) {
+  @Get('/:id')
+  public async getById(@Res() res: Response, @Param('id') id: string) {
     const noteById = await this.noteService.getNoteById(id);
-    res.send(noteById).status(HttpStatus.OK)
+    res.send(noteById).status(HttpStatus.OK);
+  }
+
+  @Delete('/:id')
+  public async deleteById(
+    @Res() res: Response,
+    @Param('id') id: string,
+  ): Promise<void> {
+    await this.noteService.deleteNoteById(id);
+    res.send('Note deleted').status(HttpStatus.OK);
   }
 }

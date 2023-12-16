@@ -6,7 +6,7 @@ import { CreateNoteDTOS } from '../DTOs/create-note.dto';
 export class NoteService {
   constructor(private readonly noteRepository: NoteRepository) {}
 
-  public async createNote(note: CreateNoteDTOS): Promise<any> {
+  public async createNote(note: CreateNoteDTOS): Promise<void> {
     this.noteRepository.create(note);
   }
 
@@ -14,7 +14,11 @@ export class NoteService {
     return await this.noteRepository.getAll();
   }
 
-  public async getNoteById(id: string){    
-    return await this.noteRepository.getById(id)
+  public async getNoteById(id: string) {
+    return await this.noteRepository.getById(id);
+  }
+
+  public async deleteNoteById(id: string): Promise<void> {
+    await this.noteRepository.delete(id);
   }
 }
