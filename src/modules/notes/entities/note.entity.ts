@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Note {
@@ -13,4 +18,7 @@ export class Note {
 
   @Column({ type: 'varchar', length: 50 })
   author: string;
+
+  @CreateDateColumn()
+  createdDate: Date;
 }
