@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { NoteService } from '../services/note.service';
 import { CreateNoteDTOS } from '../DTOs/create-note.dto';
-import { Response, Request } from 'express';
+import { Response } from 'express';
 
 @Controller('/api/note')
 export class NoteController {
