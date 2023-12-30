@@ -32,10 +32,9 @@ export class NoteRepository {
 
   public async delete(id: string): Promise<void> {
     try {
-      const noteToBeDeleted = await this.noteRepository.findOneBy({ id });
-      await this.noteRepository.delete(noteToBeDeleted);
+      await this.noteRepository.delete(id);
 
-      if (!noteToBeDeleted) {
+      if (!id) {
         throw new NotFoundException(`Note with ID: ${id} was not found`);
       }
     } catch (error) {

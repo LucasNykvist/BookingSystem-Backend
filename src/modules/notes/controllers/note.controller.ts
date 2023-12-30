@@ -39,7 +39,12 @@ export class NoteController {
     @Res() res: Response,
     @Param('id') id: string,
   ): Promise<void> {
-    await this.noteService.deleteNoteById(id);
-    res.send('Note deleted').status(HttpStatus.OK);
+    try {
+      await this.noteService.deleteNoteById(id);
+      console.log(id);
+      res.send('Note deleted').status(HttpStatus.OK);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
