@@ -13,8 +13,9 @@ export class User {
   password: string;
 
   @BeforeInsert()
-  encryptPassword() {
+  encryptPassword(): void {
     const salt = bcrypt.genSaltSync(10);
+    console.log(salt);
     this.password = bcrypt.hashSync(this.password, salt);
   }
 }
