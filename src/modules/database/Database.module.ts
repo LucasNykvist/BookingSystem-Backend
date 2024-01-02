@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Note } from '../notes/entities/note.entity';
 import { NotesModule } from '../notes/notes.module';
 import { User } from '../users/entities/user.entity';
+import { UserModule } from '../users/User.module';
 
 @Module({
   imports: [
@@ -20,9 +21,7 @@ import { User } from '../users/entities/user.entity';
     }),
     TypeOrmModule.forFeature([User, Note]),
     NotesModule,
+    UserModule,
   ],
-  controllers: [],
-  providers: [],
-  exports: [],
 })
 export class DatabaseModule {}
