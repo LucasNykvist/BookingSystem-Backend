@@ -10,9 +10,5 @@ export class CreateUserDTO {
 
   @IsString()
   @IsNotEmpty()
-  readonly phone: string;
-
-  @IsString()
-  @IsNotEmpty()
   readonly password: string;
 }

@@ -1,11 +1,10 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
+  HttpStatus,
   Param,
   Post,
-  Put,
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
@@ -25,7 +24,7 @@ export class UsersController {
   async getAllUsers(@Res() res: Response): Promise<void> {
     const users = await this.usersService.getAllUsers();
 
-    res.send(users);
+    res.send(users).status(HttpStatus.OK);
   }
 
   @Get(':id')
