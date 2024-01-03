@@ -11,11 +11,4 @@ export class User {
 
   @Column()
   password: string;
-
-  @BeforeInsert()
-  encryptPassword(): void {
-    const salt = bcrypt.genSaltSync(10);
-    console.log(salt);
-    this.password = bcrypt.hashSync(this.password, salt);
-  }
 }
