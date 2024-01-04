@@ -20,6 +20,11 @@ export class UsersController {
     return await this.usersService.createUser(user);
   }
 
+  @Post('/login')
+  async login(@Body() user: User): Promise<User> {
+    return await this.usersService.login(user);
+  }
+
   @Get()
   async getAllUsers(@Res() res: Response): Promise<void> {
     const users = await this.usersService.getAllUsers();
