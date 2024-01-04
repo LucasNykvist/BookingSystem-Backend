@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/modules/users/entities/user.entity';
 import * as bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 @Injectable()
 export class UsersService {
@@ -26,6 +27,32 @@ export class UsersService {
 
   async getUserById(id: number): Promise<User | undefined> {
     return await this.userRepository.findOneBy({ id: id });
+  }
+
+  async login(user: User): Promise<any> {
+    const userFromDb = await this.userRepository.findOneBy({
+      email: user.email,
+    });
+
+    if (!userFromDb) {
+      throw new Error('User not found');
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(
+      user.password,
+      userFromDb.password,
+    );
+
+    if (!isPasswordCorrect) {
+      throw new Error('Password is incorrect');
+    }
+
+    const token = jwt.sign(
+      { id: userFromDb.id, email: userFromDb.email },
+      process.env.JWT_SECRET,
+    );
+
+    return token;
   }
 
   async updateUser(
