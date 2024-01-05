@@ -52,7 +52,13 @@ export class UsersService {
       process.env.JWT_SECRET,
     );
 
-    return token;
+    const returnInformation = {
+      id: userFromDb.id,
+      email: userFromDb.email,
+      token: token,
+    };
+
+    return returnInformation;
   }
 
   async updateUser(

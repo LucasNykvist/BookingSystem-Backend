@@ -22,9 +22,9 @@ export class UsersController {
 
   @Post('/login')
   async login(@Body() user: User, @Res() res: Response): Promise<any> {
-    const sak = await this.usersService.login(user);
-    console.log('token: ', sak);
-    res.send(sak).status(HttpStatus.OK);
+    const loginInformation = await this.usersService.login(user);
+
+    res.send(loginInformation).status(HttpStatus.OK);
   }
 
   @Get()
