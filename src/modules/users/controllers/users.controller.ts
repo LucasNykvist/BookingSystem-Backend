@@ -21,8 +21,10 @@ export class UsersController {
   }
 
   @Post('/login')
-  async login(@Body() user: User): Promise<User> {
-    return await this.usersService.login(user);
+  async login(@Body() user: User, @Res() res: Response): Promise<any> {
+    const loginInformation = await this.usersService.login(user);
+
+    res.send(loginInformation).status(HttpStatus.OK);
   }
 
   @Get()

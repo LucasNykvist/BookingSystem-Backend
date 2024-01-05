@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/modules/users/entities/user.entity';
 import * as bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class UsersService {
@@ -52,7 +52,13 @@ export class UsersService {
       process.env.JWT_SECRET,
     );
 
-    return token;
+    const returnInformation = {
+      id: userFromDb.id,
+      email: userFromDb.email,
+      token: token,
+    };
+
+    return returnInformation;
   }
 
   async updateUser(
