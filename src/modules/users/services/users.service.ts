@@ -26,7 +26,14 @@ export class UsersService {
   }
 
   async getUserById(id: number): Promise<User | undefined> {
-    return await this.userRepository.findOneBy({ id: id });
+    const foundUser = await this.userRepository.findOneBy({ id: id });
+
+    const foundUserWithoutPassword = {
+      ...foundUser,
+      password: undefined,
+    };
+
+    return foundUserWithoutPassword;
   }
 
   async login(user: User): Promise<any> {
