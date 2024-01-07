@@ -2,8 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/modules/users/entities/user.entity';
+import { UploadedFile } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class UsersService {
@@ -72,12 +75,18 @@ export class UsersService {
   async updateUser(
     id: number,
     updatedUser: Partial<User>,
+    @UploadedFile() file: Express.Multer.File,
   ): Promise<User | null> {
     const user = await this.userRepository.findOneBy({ id: id });
 
     if (!user) {
-      throw new Error('fuck');
+      throw new Error('User not found');
     }
+
+    const filePath = path.join('uploads', file.originalname);
+    await fs.promises.writeFile(filePath, file.buffer);
+
+    updatedUser.profileImage = filePath;
 
     Object.assign(user, updatedUser);
     return await this.userRepository.save(user);
