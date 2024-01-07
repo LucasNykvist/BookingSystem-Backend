@@ -7,10 +7,13 @@ import {
   Post,
   Put,
   Res,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { UsersService } from '../services/users.service';
 import { User } from 'src/modules/users/entities/user.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('/api/users')
 export class UsersController {
@@ -41,7 +44,12 @@ export class UsersController {
   }
 
   @Put(':id')
-  async updateUser(@Param('id') id: number, @Body() user: User): Promise<User> {
-    return await this.usersService.updateUser(id, user);
+  @UseInterceptors(FileInterceptor('file'))
+  async updateUser(
+    @Param('id') id: number,
+    @Body() user: User,
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<User> {
+    return await this.usersService.updateUser(id, user, file);
   }
 }

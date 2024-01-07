@@ -19,6 +19,9 @@ export class User {
   @Column({ nullable: true })
   about: string;
 
+  @Column({ nullable: true })
+  profileImage: string;
+
   @CreateDateColumn()
   registeredAt: Date;
 }
