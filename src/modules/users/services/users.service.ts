@@ -57,6 +57,7 @@ export class UsersService {
     const token = jwt.sign(
       { id: userFromDb.id, email: userFromDb.email },
       process.env.JWT_SECRET,
+      { expiresIn: '1h' },
     );
 
     const returnInformation = {

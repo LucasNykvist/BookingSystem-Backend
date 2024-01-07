@@ -5,6 +5,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
@@ -37,5 +38,10 @@ export class UsersController {
   @Get(':id')
   async getUserById(@Param('id') id: number): Promise<User> {
     return await this.usersService.getUserById(id);
+  }
+
+  @Put(':id')
+  async updateUser(@Param('id') id: number, @Body() user: User): Promise<User> {
+    return await this.usersService.updateUser(id, user);
   }
 }
