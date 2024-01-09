@@ -16,9 +16,15 @@ export class Article {
   title: string;
 
   @Column()
-  description: string;
+  content: string;
 
-  @Column()
+  @Column({ nullable: true })
+  content2: string;
+
+  @Column({ nullable: true })
+  content3: string;
+
+  @Column({ nullable: true })
   image: string;
 
   @CreateDateColumn()
