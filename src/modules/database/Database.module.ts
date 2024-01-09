@@ -5,6 +5,8 @@ import { Note } from '../notes/entities/note.entity';
 import { NotesModule } from '../notes/notes.module';
 import { User } from '../users/entities/user.entity';
 import { UserModule } from '../users/User.module';
+import { Article } from '../articles/entities/Article.entity';
+import { ArticleModule } from '../articles/Article.module';
 
 @Module({
   imports: [
@@ -16,12 +18,13 @@ import { UserModule } from '../users/User.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: 'BookerDB',
-      entities: [User, Note],
+      entities: [User, Note, Article],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([User, Note]),
     NotesModule,
     UserModule,
+    ArticleModule,
   ],
 })
 export class DatabaseModule {}
