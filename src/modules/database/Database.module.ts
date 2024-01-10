@@ -21,7 +21,7 @@ import { ArticleModule } from '../articles/Article.module';
       entities: [User, Note, Article],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([User, Note]),
+    TypeOrmModule.forFeature([User, Note, Article]),
     NotesModule,
     UserModule,
     ArticleModule,
